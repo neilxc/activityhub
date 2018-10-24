@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application;
+using Application.Users;
+using AutoMapper;
 using Domain;
+using FluentValidation.AspNetCore;
 using Infrastructure;
+using Infrastructure.Errors;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,19 +33,34 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<ApiBehaviorOptions>(opt =>
+            {
+                opt.SuppressModelStateInvalidFilter = true;
+            });
             services.AddDataAccessServices(_configuration.GetConnectionString("DefaultConnection"));
             services.AddApplicationServices();
             services.AddInfrastructureServices();
+            services.AddAutoMapper();
             services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<DataContext>();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(opt => 
+            {
+                opt.Filters.Add(typeof(ValidatorActionFilter));
+            })
+            .AddFluentValidation(cfg => 
+            {
+                cfg.RegisterValidatorsFromAssemblyContaining(typeof(Login));
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseMiddleware<ErrorHandlingMiddleware>();
+            
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                // app.UseDeveloperExceptionPage();
             }
             else
             {

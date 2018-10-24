@@ -1,7 +1,9 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using Domain;
+using FluentValidation;
 using Infrastructure.Security;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -16,9 +18,26 @@ namespace Application.Users
             public string Password { get; set; }
         }
 
+        public class UserDataValidator : AbstractValidator<UserData>
+        {
+            public UserDataValidator()
+            {
+                RuleFor(x => x.Email).NotNull().EmailAddress().NotEmpty();
+                RuleFor(x => x.Password).NotNull().NotEmpty();
+            }
+        }
+
         public class Command : IRequest<User>
         {
             public UserData User { get; set; }
+        }
+
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator()
+            {
+                RuleFor(x => x.User).NotNull().SetValidator(new UserDataValidator());
+            }
         }
 
         public class Handler : IRequestHandler<Command, User>
@@ -26,8 +45,10 @@ namespace Application.Users
             private readonly UserManager<AppUser> _userManager;
             private readonly SignInManager<AppUser> _signInManager;
             private readonly IJwtGenerator _jwtGenerator;
-            public Handler(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IJwtGenerator jwtGenerator)
+            private readonly IMapper _mapper;
+            public Handler(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IJwtGenerator jwtGenerator, IMapper mapper)
             {
+                _mapper = mapper;
                 _jwtGenerator = jwtGenerator;
                 _signInManager = signInManager;
                 _userManager = userManager;
@@ -37,14 +58,12 @@ namespace Application.Users
                 var user = await _userManager.FindByEmailAsync(request.User.Email);
                 if (user == null)
                     throw new Exception("Failed to login");
-                
+
                 var result = await _signInManager.CheckPasswordSignInAsync(user, request.User.Password, false);
 
                 if (result.Succeeded)
                 {
-                    var userToReturn = new User();
-                    userToReturn.Username = user.UserName;
-                    userToReturn.Email = user.Email;
+                    var userToReturn = _mapper.Map<AppUser, User>(user);
                     userToReturn.Token = _jwtGenerator.CreateToken(user);
                     return userToReturn;
                 }
