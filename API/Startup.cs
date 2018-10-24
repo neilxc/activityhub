@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application;
+using Domain;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +29,8 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDataAccessServices(_configuration.GetConnectionString("DefaultConnection"));
+            services.AddApplicationServices();
+            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<DataContext>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
