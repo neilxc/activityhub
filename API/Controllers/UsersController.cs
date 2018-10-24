@@ -16,7 +16,13 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<User> Create([FromBody]Create.Command command)
+        public async Task<User> Create(Create.Command command)
+        {
+            return await _mediator.Send(command);
+        }
+
+        [HttpPost("login")]
+        public async Task<User> Login(Login.Command command)
         {
             return await _mediator.Send(command);
         }

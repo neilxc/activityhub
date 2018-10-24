@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
+using Infrastructure.Security;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -28,9 +29,12 @@ namespace Application.Users
         {
             private readonly DataContext _context;
             private readonly UserManager<AppUser> _userManager;
-            public Handler(DataContext context, UserManager<AppUser> userManager)
+            private readonly IJwtGenerator _jwtGenerator;
+
+            public Handler(DataContext context, UserManager<AppUser> userManager, IJwtGenerator jwtGenerator)
             {
                 _userManager = userManager;
+                _jwtGenerator = jwtGenerator;
                 _context = context;
             }
             public async Task<User> Handle(Command request, CancellationToken cancellationToken)
@@ -55,6 +59,7 @@ namespace Application.Users
                     var userToReturn = new User();
                     userToReturn.Username = userFromDb.UserName;
                     userToReturn.Email = userFromDb.Email;
+                    userToReturn.Token = _jwtGenerator.CreateToken(userFromDb);
                     return userToReturn;
                 }
 

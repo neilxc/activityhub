@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application;
 using Domain;
+using Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +31,7 @@ namespace API
         {
             services.AddDataAccessServices(_configuration.GetConnectionString("DefaultConnection"));
             services.AddApplicationServices();
+            services.AddInfrastructureServices();
             services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<DataContext>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
