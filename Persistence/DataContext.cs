@@ -9,10 +9,15 @@ namespace Persistence
         public DataContext(DbContextOptions<DataContext> options) : base(options) {}
 
         public DbSet<Value> Values { get; set; }
+        public DbSet<Activity> Activities { get; set; }
+        public DbSet<ActivityAttendee> ActivityAttendees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<ActivityAttendee>()
+                .HasKey(k => new {k.ActivityId, k.AppUserId});
 
             builder.Entity<Value>()
                 .HasData(
