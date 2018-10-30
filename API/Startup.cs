@@ -53,8 +53,11 @@ namespace API
             builder.AddEntityFrameworkStores<DataContext>();
             builder.AddSignInManager<SignInManager<AppUser>>();
             
+            // var key = new SymmetricSecurityKey(Encoding.UTF8.
+            //     GetBytes(_configuration["AppSettings:Token"]));
+            
             var key = new SymmetricSecurityKey(Encoding.UTF8.
-                GetBytes(_configuration["AppSettings:Token"]));
+                GetBytes("super secret key"));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => 
