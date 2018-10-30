@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -22,7 +24,9 @@ namespace Application.Activities
             }
             public async Task<ActivitiesEnvelope> Handle(Query request, CancellationToken cancellationToken)
             {
-                var activities = await _context.Activities.Include(x => x.GeoCoordinate).ToListAsync();
+                var activitiesFromDb = await _context.Activities.GetAllData().ToListAsync();
+
+                var activities = _mapper.Map<List<ActivityDto>>(activitiesFromDb);
 
                 return new ActivitiesEnvelope
                 {

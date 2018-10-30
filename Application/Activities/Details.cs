@@ -12,7 +12,7 @@ namespace Application.Activities
 {
     public class Details
     {
-        public class Query : IRequest<Activity>
+        public class Query : IRequest<ActivityDto>
         {
             public Query(int id)
             {
@@ -21,7 +21,7 @@ namespace Application.Activities
             public int Id { get; set; }
         }
 
-        public class Handler : IRequestHandler<Query, Activity>
+        public class Handler : IRequestHandler<Query, ActivityDto>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -31,16 +31,16 @@ namespace Application.Activities
                 _context = context;
             }
 
-            public async Task<Activity> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<ActivityDto> Handle(Query request, CancellationToken cancellationToken)
             {
                 var activity = await _context.Activities
-                    .Include(x => x.GeoCoordinate)
+                    .GetAllData()
                     .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
                 if (activity == null)
                     throw new RestException(HttpStatusCode.NotFound, new {Activity = Constants.NOT_FOUND});
                 
-                return activity;
+                return _mapper.Map<ActivityDto>(activity);;
             }
         }
     }
