@@ -7,8 +7,7 @@ namespace Infrastructure
     {
         public static void AddInfrastructureServices(this IServiceCollection services)
         {
-            services.AddScoped<IJwtGenerator, JwtGenerator>();
-            services.AddScoped<ICurrentUserAccessor, CurrentUserAccessor>();
+            
         }
     }
 }

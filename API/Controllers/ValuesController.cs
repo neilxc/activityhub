@@ -1,7 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Application.Values;
+using Domain;
+using MediatR;
+using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
 
 namespace API.Controllers
 {
@@ -9,27 +12,27 @@ namespace API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        public DataContext Context { get; }
-        public ValuesController(DataContext context)
+        private readonly IMediator _mediator;
+
+        public ValuesController(IMediator mediator)
         {
-            Context = context;
+            _mediator = mediator;
         }
         // GET api/values
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<List<Value>> Get()
         {
-            var values = await Context.Values.ToListAsync();
-
-            return Ok(values);
+            return await _mediator.Send(new List.Query());
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<Value> Get(int id)
         {
-            var value = await Context.Values.FirstOrDefaultAsync(x => x.Id == id);
-
-            return Ok(value);
+            return await _mediator.Send(new Details.Query
+            {
+                Id = id
+            });
         }
 
         // POST api/values
