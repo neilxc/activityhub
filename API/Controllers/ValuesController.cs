@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -12,16 +9,16 @@ namespace API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        public DataContext _context { get; }
+        public DataContext Context { get; }
         public ValuesController(DataContext context)
         {
-            _context = context;
+            Context = context;
         }
         // GET api/values
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var values = await _context.Values.ToListAsync();
+            var values = await Context.Values.ToListAsync();
 
             return Ok(values);
         }
@@ -30,7 +27,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var value = await _context.Values.FirstOrDefaultAsync(x => x.Id == id);
+            var value = await Context.Values.FirstOrDefaultAsync(x => x.Id == id);
 
             return Ok(value);
         }

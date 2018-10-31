@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using Application;
 using Application.Users;
 using AutoMapper;
@@ -10,19 +6,15 @@ using Domain;
 using FluentValidation.AspNetCore;
 using Infrastructure;
 using Infrastructure.Errors;
-using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Persistence;
 
@@ -48,7 +40,7 @@ namespace API
             services.AddInfrastructureServices();
             services.AddAutoMapper();
             
-            IdentityBuilder builder = services.AddIdentityCore<AppUser>();
+            var builder = services.AddIdentityCore<AppUser>();
             builder = new IdentityBuilder(builder.UserType, typeof(AppRole), builder.Services);
             builder.AddEntityFrameworkStores<DataContext>();
             builder.AddSignInManager<SignInManager<AppUser>>();

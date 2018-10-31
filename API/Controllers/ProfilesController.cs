@@ -9,7 +9,7 @@ namespace API.Controllers
         [HttpGet("{username}")]
         public async Task<Profile> Get(string username)
         {
-            return await Mediator.Send(new Details.Query()
+            return await Mediator.Send(new Details.Query
             {
                 UserName = username
             });
