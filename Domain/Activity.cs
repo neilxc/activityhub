@@ -13,5 +13,6 @@ namespace Domain
         public string Venue { get; set; }
         public GeoCoordinate GeoCoordinate { get; set; }
         public ICollection<ActivityAttendee> Attendees { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }

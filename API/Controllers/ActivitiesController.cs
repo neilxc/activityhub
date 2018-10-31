@@ -9,9 +9,9 @@ namespace API.Controllers
     public class ActivitiesController : BaseController
     {
         [HttpGet]
-        public async Task<ActivitiesEnvelope> List()
+        public async Task<ActivitiesEnvelope> List(string username, string activityFilter, int? limit, int? offset)
         {
-            return await Mediator.Send(new List.Query());
+            return await Mediator.Send(new List.Query(username, activityFilter, limit, offset));
         }
 
         [HttpPost]
