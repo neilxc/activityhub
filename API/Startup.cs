@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Reflection;
 using System.Text;
 using Application;
 using Application.Interfaces;
@@ -18,6 +17,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -34,6 +34,24 @@ namespace API
             _configuration = configuration;
         }
 
+        public void ConfigureDevelopmentServices(IServiceCollection services)
+        {
+            services.AddDbContext<DataContext>(opt => 
+            {
+                opt.UseSqlite(_configuration.GetConnectionString("DefaultConnection"));
+            });
+            
+            ConfigureServices(services);
+        }
+
+        public void ConfigureProductionServices(IServiceCollection services)
+        {
+            services.AddDbContext<DataContext>(opt => { 
+                opt.UseSqlServer("fake connection string"); });
+            
+            ConfigureServices(services);
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -41,7 +59,6 @@ namespace API
             {
                 opt.SuppressModelStateInvalidFilter = true;
             });
-            services.AddDataAccessServices(_configuration.GetConnectionString("DefaultConnection"));
             services.AddApplicationServices();
             services.AddInfrastructureServices();
             services.AddScoped<IJwtGenerator, JwtGenerator>();
