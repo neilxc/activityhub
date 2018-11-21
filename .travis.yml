@@ -11,7 +11,7 @@ matrix:
 
 notifications:
   email:
-  - neil@intapoint.com
+  - neil1@intapoint.com
 
 deploy:
   provider: azure_web_apps
