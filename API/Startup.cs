@@ -56,7 +56,7 @@ namespace API
                 x.AddSecurityDefinition("Bearer", new ApiKeyScheme
                 {
                     In = "header",
-                    Description = "Please insert JWT with Bearer into field",
+                    Description = "Please insert JWT with Bearer into field test",
                     Name = "Authorization",
                     Type = "apiKey"
                 });
