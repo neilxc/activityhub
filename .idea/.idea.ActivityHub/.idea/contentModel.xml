@@ -35,7 +35,6 @@
           <e p="launchSettings.json" t="Include" />
         </e>
         <e p="Startup.cs" t="Include" />
-        <e p="travis.yml" t="Include" />
         <e p="wwwroot" t="Include" />
       </e>
       <e p="API.Tests" t="IncludeRecursive">
