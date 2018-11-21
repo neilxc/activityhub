@@ -46,9 +46,10 @@ namespace API
 
         public void ConfigureProductionServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(opt => { 
-                opt.UseSqlServer("fake connection string"); });
-            
+            services.AddDbContext<DataContext>(opt =>
+            {
+                opt.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
+            });
             ConfigureServices(services);
         }
 
