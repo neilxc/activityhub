@@ -6,8 +6,9 @@ matrix:
     script:
     - dotnet restore
     - dotnet build
-    - dotnet test
+    - dotnet test API.Tests
+    - dotnet test Application.Tests
 
 notifications:
   email:
-  - neil@ntapoint.com
+  - neil@intapoint.com
