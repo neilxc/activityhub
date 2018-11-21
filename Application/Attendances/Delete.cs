@@ -2,11 +2,13 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Activities;
+using Application.Interfaces;
 using AutoMapper;
 using Domain;
 using Infrastructure;
 using Infrastructure.Errors;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -15,7 +17,7 @@ namespace Application.Attendances
 {
     public class Delete
     {
-        public class Command : IRequest<ActivityDto>
+        public class Command : IRequest
         {
             public Command(int id)
             {
@@ -24,7 +26,7 @@ namespace Application.Attendances
             public int Id { get; set; }
         }
 
-        public class Handler : IRequestHandler<Command, ActivityDto>
+        public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
             private readonly ICurrentUserAccessor _currentUserAccessor;
@@ -39,7 +41,7 @@ namespace Application.Attendances
                 _mapper = mapper;
             }
 
-            public async Task<ActivityDto> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
                 var activity = await _context.Activities.GetAllData()
                     .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
@@ -58,10 +60,8 @@ namespace Application.Attendances
                     _context.ActivityAttendees.Remove(attendance);
                     await _context.SaveChangesAsync(cancellationToken);
                 }
-
-                var activityDto = _mapper.Map<Activity, ActivityDto>(activity);
-
-                return activityDto;
+                
+                return Unit.Value;
             }
         }
     }

@@ -80,7 +80,7 @@ namespace Application.Activities
                 return new ActivitiesEnvelope
                 {
                     Activities = activities,
-                    ActivityCount = activities.Count
+                    ActivityCount = queryable.Count()
                 };
             }
         }

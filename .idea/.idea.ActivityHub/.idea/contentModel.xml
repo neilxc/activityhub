@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.3.1/build/netcoreapp1.0/xunit.runner.reporters.netcoreapp10.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.3.1/build/netcoreapp1.0/xunit.runner.utility.netcoreapp10.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.3.1/build/netcoreapp1.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="ActivityHub.sln" t="IncludeFlat" />
+      <e p="API" t="IncludeRecursive">
+        <e p="activitydb.db" t="Include" />
+        <e p="API.csproj" t="IncludeRecursive" />
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Controllers" t="Include">
+          <e p="ActivitiesController.cs" t="Include" />
+          <e p="AttendanceController.cs" t="Include" />
+          <e p="BaseController.cs" t="Include" />
+          <e p="CommentsController.cs" t="Include" />
+          <e p="FollowersController.cs" t="Include" />
+          <e p="PhotosController.cs" t="Include" />
+          <e p="ProfilesController.cs" t="Include" />
+          <e p="UsersController.cs" t="Include" />
+          <e p="ValuesController.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.1" t="Include">
+              <e p="API.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Startup.cs" t="Include" />
+        <e p="travis.yml" t="Include" />
+        <e p="wwwroot" t="Include" />
+      </e>
+      <e p="API.Tests" t="IncludeRecursive">
+        <e p="API.Tests.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.1" t="Include">
+              <e p="API.Tests.AssemblyInfo.cs" t="Include" />
+              <e p="API.Tests.Program.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="UsersControllerShould.cs" t="Include" />
+        <e p="ValuesApiShould.cs" t="Include" />
+      </e>
+      <e p="Application" t="IncludeRecursive">
+        <e p="Activities" t="Include">
+          <e p="ActivitiesEnvelope.cs" t="Include" />
+          <e p="ActivityDto.cs" t="Include" />
+          <e p="ActivityExtensions.cs" t="Include" />
+          <e p="Create.cs" t="Include" />
+          <e p="Details.cs" t="Include" />
+          <e p="Edit.cs" t="Include" />
+          <e p="List.cs" t="Include" />
+          <e p="MappingProfile.cs" t="Include" />
+        </e>
+        <e p="Application.csproj" t="IncludeRecursive" />
+        <e p="Attendances" t="Include">
+          <e p="Add.cs" t="Include" />
+          <e p="Attendee.cs" t="Include" />
+          <e p="Delete.cs" t="Include" />
+          <e p="MappingProfile.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Comments" t="Include">
+          <e p="CommentDto.cs" t="Include" />
+          <e p="Create.cs" t="Include" />
+          <e p="Delete.cs" t="Include" />
+          <e p="List.cs" t="Include" />
+          <e p="MappingProfile.cs" t="Include" />
+        </e>
+        <e p="Errors" t="Include">
+          <e p="Constants.cs" t="Include" />
+          <e p="RestException.cs" t="Include" />
+        </e>
+        <e p="Followers" t="Include">
+          <e p="Add.cs" t="Include" />
+          <e p="Delete.cs" t="Include" />
+        </e>
+        <e p="Interests" t="Include" />
+        <e p="Interfaces" t="Include">
+          <e p="ICloudinaryAccount.cs" t="Include" />
+          <e p="ICurrentUserAccessor.cs" t="Include" />
+          <e p="IJwtGenerator.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="Application.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Photos" t="Include">
+          <e p="Create.cs" t="Include" />
+          <e p="Delete.cs" t="Include" />
+          <e p="MappingProfile.cs" t="Include" />
+          <e p="PhotoDto.cs" t="Include" />
+        </e>
+        <e p="Profiles" t="Include">
+          <e p="Details.cs" t="Include" />
+          <e p="IProfileReader.cs" t="Include" />
+          <e p="MappingProfile.cs" t="Include" />
+          <e p="Profile.cs" t="Include" />
+          <e p="ProfileReader.cs" t="Include" />
+        </e>
+        <e p="ServiceCollectionExtensions.cs" t="Include" />
+        <e p="Users" t="Include">
+          <e p="Create.cs" t="Include" />
+          <e p="Login.cs" t="Include" />
+          <e p="MappingProfile.cs" t="Include" />
+          <e p="User.cs" t="Include" />
+        </e>
+        <e p="ValidatorActionFilter.cs" t="Include" />
+        <e p="Values" t="Include">
+          <e p="Details.cs" t="Include" />
+          <e p="List.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Application.Tests" t="IncludeRecursive">
+        <e p="Activities" t="Include">
+          <e p="ActivitiesListFeatureShould.cs" t="Include" />
+          <e p="CreateTest.cs" t="Include" />
+          <e p="DetailsTest.cs" t="Include" />
+          <e p="EditTest.cs" t="Include" />
+        </e>
+        <e p="Application.Tests.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Interfaces" t="Include">
+          <e p="CurrentUserAccessorTest.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.1" t="Include">
+              <e p="Application.Tests.AssemblyInfo.cs" t="Include" />
+              <e p="Application.Tests.Program.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="TestBase.cs" t="Include" />
+        <e p="UsersFeatureShould.cs" t="Include" />
+      </e>
+      <e p="Domain" t="IncludeRecursive">
+        <e p="Activity.cs" t="Include" />
+        <e p="ActivityAttendee.cs" t="Include" />
+        <e p="AppRole.cs" t="Include" />
+        <e p="AppUser.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Comment.cs" t="Include" />
+        <e p="Domain.csproj" t="IncludeRecursive" />
+        <e p="FollowedPeople.cs" t="Include" />
+        <e p="GeoCoordinate.cs" t="Include" />
+        <e p="Interest.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="Domain.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Photo.cs" t="Include" />
+        <e p="UserInterest.cs" t="Include" />
+        <e p="Value.cs" t="Include" />
+      </e>
+      <e p="Infrastructure" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="CloudinaryAccount.cs" t="Include" />
+        <e p="CloudinarySettings.cs" t="Include" />
+        <e p="CurrentUserAccessor.cs" t="Include" />
+        <e p="Errors" t="Include">
+          <e p="ErrorHandlingMiddleware.cs" t="Include" />
+        </e>
+        <e p="Identity" t="Include" />
+        <e p="Infrastructure.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="Infrastructure.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Security" t="Include">
+          <e p="JwtGenerator.cs" t="Include" />
+        </e>
+        <e p="ServiceCollectionExtensions.cs" t="Include" />
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Persistence" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="DataContext.cs" t="Include" />
+        <e p="Migrations" t="Include">
+          <e p="20181023183744_InitialCreate.cs" t="Include" />
+          <e p="20181023183744_InitialCreate.Designer.cs" t="Include" />
+          <e p="20181023185632_SeedValues.cs" t="Include" />
+          <e p="20181023185632_SeedValues.Designer.cs" t="Include" />
+          <e p="20181024082216_AddedIdentity.cs" t="Include" />
+          <e p="20181024082216_AddedIdentity.Designer.cs" t="Include" />
+          <e p="20181025092317_AddedActivity.cs" t="Include" />
+          <e p="20181025092317_AddedActivity.Designer.cs" t="Include" />
+          <e p="20181025161219_AddedAttendees.cs" t="Include" />
+          <e p="20181025161219_AddedAttendees.Designer.cs" t="Include" />
+          <e p="20181030105004_Following.cs" t="Include" />
+          <e p="20181030105004_Following.Designer.cs" t="Include" />
+          <e p="20181031095403_ActivityComments.cs" t="Include" />
+          <e p="20181031095403_ActivityComments.Designer.cs" t="Include" />
+          <e p="20181115041125_addedInterests.cs" t="Include" />
+          <e p="20181115041125_addedInterests.Designer.cs" t="Include" />
+          <e p="20181120132010_Photos.cs" t="Include" />
+          <e p="20181120132010_Photos.Designer.cs" t="Include" />
+          <e p="DataContextModelSnapshot.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="Persistence.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Persistence.csproj" t="IncludeRecursive" />
+        <e p="ServiceCollectionExtensions.cs" t="Include" />
+      </e>
+      <e p="Tests" t="Include" />
+    </e>
+    <e p="$USER_HOME$/Library/Caches/Rider2018.2/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2018.2/resharper-host/local/Transient/ReSharperHost/v182/SolutionCaches/_ActivityHub.2114744177.00" t="ExcludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/consoles/db" t="IncludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/scratches" t="IncludeRecursive" />
+  </component>
+</project>

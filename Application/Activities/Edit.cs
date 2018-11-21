@@ -52,9 +52,13 @@ namespace Application.Activities
                 activity.Date = request.Activity.Date ?? activity.Date;
                 activity.City = request.Activity.City ?? activity.City;
                 activity.Venue = request.Activity.Venue ?? activity.Venue;
-                activity.GeoCoordinate.Latitude = request.Activity.GeoCoordinate?.Latitude ?? activity.GeoCoordinate.Latitude;
-                activity.GeoCoordinate.Longitude = request.Activity.GeoCoordinate?.Longitude ?? activity.GeoCoordinate.Longitude;
 
+                if (activity.GeoCoordinate != null)
+                {
+                    activity.GeoCoordinate.Latitude = activity.GeoCoordinate.Latitude;
+                    activity.GeoCoordinate.Longitude = activity.GeoCoordinate.Longitude;
+                }
+                
                 await _context.SaveChangesAsync(cancellationToken);
 
                 return activity;

@@ -23,7 +23,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id}/attend")]
-        public async Task<ActivityDto> Delete(int id)
+        public async Task<Unit> Delete(int id)
         {
             return await _mediator.Send(new Delete.Command(id));
         }

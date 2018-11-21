@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Interfaces;
 using AutoMapper;
 using Domain;
 using FluentValidation;

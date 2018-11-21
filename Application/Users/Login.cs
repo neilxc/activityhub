@@ -1,12 +1,14 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Interfaces;
 using AutoMapper;
 using Domain;
 using FluentValidation;
-using Infrastructure.Security;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Persistence;
 
 namespace Application.Users
 {
@@ -18,27 +20,27 @@ namespace Application.Users
             public string Password { get; set; }
         }
 
-        public class UserDataValidator : AbstractValidator<UserData>
-        {
-            public UserDataValidator()
-            {
-                RuleFor(x => x.Email).NotNull().EmailAddress().NotEmpty();
-                RuleFor(x => x.Password).NotNull().NotEmpty();
-            }
-        }
+//        public class UserDataValidator : AbstractValidator<UserData>
+//        {
+//            public UserDataValidator()
+//            {
+//                RuleFor(x => x.Email).NotNull().EmailAddress().NotEmpty();
+//                RuleFor(x => x.Password).NotNull().NotEmpty();
+//            }
+//        }
 
         public class Command : IRequest<User>
         {
             public UserData User { get; set; }
         }
 
-        public class CommandValidator : AbstractValidator<Command>
-        {
-            public CommandValidator()
-            {
-                RuleFor(x => x.User).NotNull().SetValidator(new UserDataValidator());
-            }
-        }
+//        public class CommandValidator : AbstractValidator<Command>
+//        {
+//            public CommandValidator()
+//            {
+//                RuleFor(x => x.User).NotNull().SetValidator(new UserDataValidator());
+//            }
+//        }
 
         public class Handler : IRequestHandler<Command, User>
         {
@@ -53,6 +55,7 @@ namespace Application.Users
                 _signInManager = signInManager;
                 _userManager = userManager;
             }
+
             public async Task<User> Handle(Command request, CancellationToken cancellationToken)
             {
                 var user = await _userManager.FindByEmailAsync(request.User.Email);

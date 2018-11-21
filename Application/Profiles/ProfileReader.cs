@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Application.Interfaces;
 using AutoMapper;
 using Domain;
 using Infrastructure;

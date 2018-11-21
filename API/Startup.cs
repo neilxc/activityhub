@@ -1,11 +1,16 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using System.Text;
 using Application;
+using Application.Interfaces;
 using Application.Users;
 using AutoMapper;
 using Domain;
 using FluentValidation.AspNetCore;
 using Infrastructure;
 using Infrastructure.Errors;
+using Infrastructure.Security;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -17,6 +22,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Persistence;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace API
 {
@@ -38,7 +44,32 @@ namespace API
             services.AddDataAccessServices(_configuration.GetConnectionString("DefaultConnection"));
             services.AddApplicationServices();
             services.AddInfrastructureServices();
+            services.AddScoped<IJwtGenerator, JwtGenerator>();
+            services.AddScoped<ICurrentUserAccessor, CurrentUserAccessor>();
+            services.Configure<CloudinarySettings>(_configuration.GetSection("CloudinarySettings"));
+            services.AddScoped<ICloudinaryAccount, CloudinaryAccount>();
             services.AddAutoMapper();
+            services.AddMediatR(typeof(Login.Handler).Assembly);
+
+            services.AddSwaggerGen(x =>
+            {
+                x.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    In = "header",
+                    Description = "Please insert JWT with Bearer into field",
+                    Name = "Authorization",
+                    Type = "apiKey"
+                });
+                
+                x.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                {
+                    {"Bearer", new string[] {}}
+                });
+                x.SwaggerDoc("v1", new Info {Title = "Activity Hub", Version = "v1"});
+                x.DocInclusionPredicate((version, apiDescription) => true);
+                x.CustomSchemaIds(y => y.FullName);
+                x.TagActionsBy(y => y.GroupName);
+            });
             
             var builder = services.AddIdentityCore<AppUser>();
             builder = new IdentityBuilder(builder.UserType, typeof(AppRole), builder.Services);
@@ -95,6 +126,9 @@ namespace API
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseMvc();
+
+            app.UseSwagger(x => { x.RouteTemplate = "swagger/{documentName}/swagger.json"; });
+            app.UseSwaggerUI(x => { x.SwaggerEndpoint("/swagger/v1/swagger.json", "Activity Hub API"); });
         }
     }
 }

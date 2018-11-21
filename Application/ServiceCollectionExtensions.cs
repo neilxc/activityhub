@@ -1,4 +1,5 @@
 using Application.Profiles;
+using Application.Users;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,7 +9,6 @@ namespace Application
     {
         public static void AddApplicationServices(this IServiceCollection services)
         {
-            services.AddMediatR();
             services.AddScoped<IProfileReader, ProfileReader>();
         }
     }

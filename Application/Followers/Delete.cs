@@ -1,6 +1,7 @@
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Interfaces;
 using Application.Profiles;
 using FluentValidation;
 using Infrastructure;

@@ -1,10 +1,13 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Interfaces;
 using AutoMapper;
 using Domain;
 using FluentValidation;
+using Infrastructure;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Activities
@@ -35,7 +38,7 @@ namespace Application.Activities
             }
         }
 
-        public class Command : IRequest<Activity>
+        public class Command : IRequest<ActivityDto>
         {
             public ActivityData Activity { get; set; }
         }
@@ -48,23 +51,46 @@ namespace Application.Activities
             }
         }
 
-        public class Handler : IRequestHandler<Command, Activity>
+        public class Handler : IRequestHandler<Command, ActivityDto>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
-            public Handler(DataContext context, IMapper mapper)
+            private readonly ICurrentUserAccessor _currentUserAccessor;
+
+            public Handler(DataContext context, IMapper mapper, ICurrentUserAccessor currentUserAccessor)
             {
                 _mapper = mapper;
+                _currentUserAccessor = currentUserAccessor;
                 _context = context;
             }
-            public async Task<Activity> Handle(Command request, CancellationToken cancellationToken)
+            
+            public async Task<ActivityDto> Handle(Command request, CancellationToken cancellationToken)
             {
                 var activity = _mapper.Map<ActivityData, Activity>(request.Activity);
 
+                var username = _currentUserAccessor.GetCurrentUsername();
+
+                var user = _context.Users.FirstOrDefaultAsync(x => x.UserName == username, cancellationToken).Result;
+
                 await _context.Activities.AddAsync(activity, cancellationToken);
+                
+                var attendee = new ActivityAttendee
+                {
+                    AppUser = user,
+                    Activity = activity,
+                    DateJoined = DateTime.Now,
+                    IsHost = true,
+                    ActivityId = activity.Id,
+                    AppUserId = user.Id
+                };
+
+                await _context.ActivityAttendees.AddAsync(attendee, cancellationToken);
+
                 await _context.SaveChangesAsync(cancellationToken);
 
-                return activity;
+                var activityToReturn = _mapper.Map<Activity, ActivityDto>(activity);
+
+                return activityToReturn;
             }
         }
     }

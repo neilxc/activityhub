@@ -6,10 +6,10 @@ namespace Application.Tests
 {
     public class TestBase
     {
-        public DataContext GetDbContext(bool useSQLite = false)
+        public DataContext GetDbContext(bool useSqLite = false)
         {
             var builder = new DbContextOptionsBuilder<DataContext>();
-            if (useSQLite)
+            if (useSqLite)
             {
                 builder.UseSqlite("DataSource=:memory:", x => { });
             }
@@ -19,7 +19,7 @@ namespace Application.Tests
             }
             
             var dbContext = new DataContext(builder.Options);
-            if (useSQLite)
+            if (useSqLite)
             {
                 // SQLite needs to open connection to db.
                 // Not required for in memory database

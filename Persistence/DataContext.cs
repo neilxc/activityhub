@@ -13,13 +13,20 @@ namespace Persistence
         public DbSet<ActivityAttendee> ActivityAttendees { get; set; }
         public DbSet<FollowedPeople> FollowedPeople { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<UserInterest> UserInterests { get; set; }
+        public DbSet<Photo> Photos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<ActivityAttendee>()
-                .HasKey(k => new {k.ActivityId, k.AppUserId});
+            builder.Entity<ActivityAttendee>(b =>
+                {
+                   b.HasKey(k => new {k.ActivityId, k.AppUserId});
+                   b.HasOne(a => a.Activity)
+                        .WithMany(at => at.Attendees)
+                        .HasForeignKey(a => a.ActivityId);
+                });
 
             builder.Entity<Value>()
                 .HasData(
@@ -39,6 +46,14 @@ namespace Persistence
                 b.HasOne(pt => pt.Target)
                     .WithMany(t => t.Following)
                     .HasForeignKey(pt => pt.TargetId);
+            });
+
+            builder.Entity<UserInterest>(b =>
+            {
+                b.HasKey(t => new {t.AppUserId, t.InterestId});
+                b.HasOne(x => x.AppUser)
+                    .WithMany(y => y.UserInterests)
+                    .HasForeignKey(x => x.AppUserId);
             });
         }
     }
