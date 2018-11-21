@@ -6,6 +6,7 @@ matrix:
     script:
     - dotnet restore
     - dotnet build
+    - dotnet test
 
 notifications:
   email:
