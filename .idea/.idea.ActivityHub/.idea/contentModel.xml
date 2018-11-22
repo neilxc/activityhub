@@ -196,8 +196,8 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="DataContext.cs" t="Include" />
         <e p="Migrations" t="Include">
-          <e p="20181122033438_InitialCreate.cs" t="Include" />
-          <e p="20181122033438_InitialCreate.Designer.cs" t="Include" />
+          <e p="20181122034619_InitialCreate.cs" t="Include" />
+          <e p="20181122034619_InitialCreate.Designer.cs" t="Include" />
           <e p="DataContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">

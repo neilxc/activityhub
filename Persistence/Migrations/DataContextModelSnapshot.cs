@@ -376,12 +376,12 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.AppUser", "Observer")
                         .WithMany("Followers")
                         .HasForeignKey("ObserverId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.AppUser", "Target")
                         .WithMany("Following")
                         .HasForeignKey("TargetId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Domain.Photo", b =>

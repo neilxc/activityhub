@@ -41,11 +41,13 @@ namespace Persistence
 
                 b.HasOne(pt => pt.Observer)
                     .WithMany(p => p.Followers)
-                    .HasForeignKey(pt => pt.ObserverId);
+                    .HasForeignKey(pt => pt.ObserverId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
                 b.HasOne(pt => pt.Target)
                     .WithMany(t => t.Following)
-                    .HasForeignKey(pt => pt.TargetId);
+                    .HasForeignKey(pt => pt.TargetId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             builder.Entity<UserInterest>(b =>
