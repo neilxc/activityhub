@@ -196,24 +196,8 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="DataContext.cs" t="Include" />
         <e p="Migrations" t="Include">
-          <e p="20181023183744_InitialCreate.cs" t="Include" />
-          <e p="20181023183744_InitialCreate.Designer.cs" t="Include" />
-          <e p="20181023185632_SeedValues.cs" t="Include" />
-          <e p="20181023185632_SeedValues.Designer.cs" t="Include" />
-          <e p="20181024082216_AddedIdentity.cs" t="Include" />
-          <e p="20181024082216_AddedIdentity.Designer.cs" t="Include" />
-          <e p="20181025092317_AddedActivity.cs" t="Include" />
-          <e p="20181025092317_AddedActivity.Designer.cs" t="Include" />
-          <e p="20181025161219_AddedAttendees.cs" t="Include" />
-          <e p="20181025161219_AddedAttendees.Designer.cs" t="Include" />
-          <e p="20181030105004_Following.cs" t="Include" />
-          <e p="20181030105004_Following.Designer.cs" t="Include" />
-          <e p="20181031095403_ActivityComments.cs" t="Include" />
-          <e p="20181031095403_ActivityComments.Designer.cs" t="Include" />
-          <e p="20181115041125_addedInterests.cs" t="Include" />
-          <e p="20181115041125_addedInterests.Designer.cs" t="Include" />
-          <e p="20181120132010_Photos.cs" t="Include" />
-          <e p="20181120132010_Photos.Designer.cs" t="Include" />
+          <e p="20181122020421_InitialCreate.cs" t="Include" />
+          <e p="20181122020421_InitialCreate.Designer.cs" t="Include" />
           <e p="DataContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
